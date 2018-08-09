@@ -1,0 +1,84 @@
+<div class="center_content">
+    {% if tasks %}
+        {% for task in tasks %}
+            <div class="task" task_id="{{task.id_task}}">
+                <div class="title {{task.clas}}" id="task{{task.id_task}}" title="{{task.title}}">
+                   <ul>
+                       <li>
+                           <i class="create fa fa-pencil" aria-hidden="true"></i> 
+                           <input type="text" value="{{task.name_task}}" disabled>
+                           <br>
+                           <span class="date_add">Дата постановки задачи: {{task.date_add}}</span>
+                           <span class="date_end">Дата окончания задачи: {{task.date_end}}</span>
+                       </li>
+                   </ul>
+                   {{task.accept|raw }}
+                </div>
+                <div class="task_detail">
+                    <div class="over_task_detail">
+                    <div>
+                        <div class="avatar"><span>{{task.fletter}}</span></div><a class="user_info" url="/users/getCurrentUser/?id_user={{task.id_user_set}}">{{task.name_user_set}}</a>
+                    </div>
+                    {% if task.set_the_task == 1 %}
+                        <div class="create_date">
+                            <div id="calendar">
+                               <input type="text" id="datepicker"><label for="datepicker"><i class="fa fa-calendar" aria-hidden="true"></i> Изменить дату</label>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="create_date">
+                        <i class="fa fa-clock-o" aria-hidden="true"> Напомнить. </i>
+                        {% if task.date_recall != '0000-00-00 00:00:00' %}
+                            Дата напоминания {{task.date_recall}}
+                        {% endif %}
+                        <form class="recall" action="/tasks/recallTask/">
+                           <i class="fa fa-times closed_recall" aria-hidden="true"></i>
+                           <input id="datetime" name="datetime_recall" value="{{task.date_recall}}" type="datetime-local">
+                           <input name="task_id" type="hidden" value="{{task.id_task}}">
+                           <br><br>
+                           <input type="submit" name="recall" value="Напомнить" id = "recall">
+                           <div class="clear"></div>
+                        </form>
+                    </div>
+                    {% if task.set_the_task == 1 %}
+                        <div class="create_date" id="add_task" parent_id='{{task.id_task}}' id_user='{{ task.id_user_set }}' name_user='{{ task.name_user_set }}' date_end = '{{task.date_end}}'> 
+                            <i class="fa fa-plus-square-o" aria-hidden="true" id="under_task"></i> Добавить подзадачу
+                        </div>
+                    {% endif %}
+                    <div class="clear"></div>
+                    <div class="text_task">
+                        {{task.description}}
+                    </div>
+                    <div class="coments">
+                        <div class="com_over">
+                           {% if task.coments %}
+                               {% for coment in task.coments %}
+                                   <div class="item_coment">
+                                        <a href="">{{coment.name}}</a>
+                                        <p>
+                                            {{coment.coment|raw }}
+                                        </p>
+                                       <span>{{coment.date}}</span>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                Комментариев к задаче нет!
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="nev_text">
+                        <form action="/tasks/addComment">
+                            <input type="hidden" name = "id_task" value="{{task.id_task}}">
+                            <input type="hidden" name = "task_name" value="{{task.title}}">
+                            <textarea id="text_user" autocomplete = "off" name="text" ></textarea>
+                            <button id="send_com">Отправить</button>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="eror_message">{{error}}</div>
+    {% endif %}
+</div>

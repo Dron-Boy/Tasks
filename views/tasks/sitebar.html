@@ -1,0 +1,46 @@
+<div class="left_instr">
+    <ul>
+        <li><i class="fa fa-bars" aria-hidden="true" id="show_menu" title="Скрыть/Показать меню"></i></li>
+        <li><i class="fa fa-sort" aria-hidden="true" title="Сортировка"></i></li>
+        <li><i  class="fa fa-folder-o" aria-hidden="true" id="folders" title="Разделы"></i></li>
+        <li><i class="fa fa-users" aria-hidden="true" id="add_user" title="Добавить сотрудника"></i></li>
+        <li><i class="fa fa-plus-square-o" aria-hidden="true" parent_id='0' id="add_task" title="Создать задачу"></i></li>
+        <li><i class="fa fa-exchange" aria-hidden="true" title="Переместить задачу" ></i></li>
+        <li><i class="fa fa-check" aria-hidden="true" id="ExecutedTask" title="Отметить как выполнены"></i></li>
+        <li><i class="fa fa-times" aria-hidden="true" id="remove" title="Удалить выбраные"></i></li>
+        <li><i class="fa fa-files-o" aria-hidden="true" id="copy" title="Копировать выбраные"></i></li>
+        <li><i class="fa fa-share" aria-hidden="true" id="reply" title="Востановить"></i></li>
+        <li><input id="colorpickerField" type="text" value="" >
+            <label for="colorpickerField" id="col" ><i class="fa fa-font" aria-hidden="true"></i></label>
+        </li>
+        <li><i class="fa fa-paperclip" aria-hidden="true" title="Закрепить"></i></li>
+    </ul>
+</div>
+<div class="left_content sitebar" show="1">
+    <div class="name">
+        <div class="avatar"><span>{{ user.fletter }}</span></div>{{ user.name }}<i class="fa fa-bell-o" id="notification" url="/actions/getActions" aria-hidden="true"></i>
+        <div class="clear"></div>
+    </div>
+    <div class="modal_notification" show="0">
+        <div class="last_doing">
+            Последние действия
+        </div>
+        <div class="content_notification" >
+
+        </div>
+    </div>
+    <div class="clear"></div>
+    <ul class="zadachi">
+        {% if tasks %}
+           {% for task in tasks %}
+                <li id="item1" task_id='{{task.id}}'>
+                  <i class="create fa fa-pencil"  aria-hidden="true"></i> <input type="text" value="{{task.name}}" disabled><input type="checkbox" id="check{{task.id}}" name=""><label for="check{{task.id}}"></label><div class="date_change"></div><span class="clear"></span>
+                  <div class="short_desc">{{task.description}}</div>
+                </li>
+            {% endfor %}
+        {% else %}
+            {{error}}
+        {% endif %}
+    </ul>
+    <input type="button" value="Сохранить сортировку" id="save_sort">
+</div>

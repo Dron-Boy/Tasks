@@ -1,0 +1,40 @@
+
+<div class="user_info_block {% if users.id == users.cur_user %} change {% endif %}">
+   <div class="avatar"><span>{{ users.f_letter }}</span>{{ users.name }}</div>
+    <table>
+        <tr>
+            <td>Логин</td>
+            <td>{{ users.name }}</td>
+        </tr>
+        <tr>
+            <td>Имя</td>
+            <td>{{ users.first_name_user }}</td>
+        </tr>
+        <tr>
+            <td>Фамилия</td>
+            <td>{{ users.last_name_user }}</td>
+        </tr>
+        <tr>
+            <td>E-mail</td>
+            <td>{{ users.email }}</td>
+        </tr>
+        {% if users.id == users.cur_user %}
+            <tr>
+                <td>Пароль</td>
+                <td>{{ users.password_no_md5 }}</td>
+            </tr>
+         {% endif %}
+        <tr>
+            <td>Название компании</td>
+            <td>{{ departments.kompany_name }}</td>
+        </tr>
+        <tr>
+            <td>Название отдела</td>
+            <td>{{ departments.name_department }}</td>
+        </tr>
+        <tr>
+            <td>Дата регистрации</td>
+            <td>{{ users.date_register }}</td>
+        </tr>
+    </table>
+</div>

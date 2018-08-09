@@ -1,0 +1,9 @@
+<ul>
+    {% if users %}
+        {% for user in users %}
+            <li class="user_item" id_user="{{user.user_id}}">{{user.name}}</li>
+        {% endfor %}
+    {% else %}
+        <li>{{error}}</li>
+    {% endif %}
+</ul>

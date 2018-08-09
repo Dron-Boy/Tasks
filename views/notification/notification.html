@@ -1,0 +1,18 @@
+{% if actions %}
+   {% for act in actions %}
+       <div class="notification_block">
+            <div class="notification">
+                <div class="name_user">
+                    <div class="avatar"><span>{{ act.f_letter }}</span></div><a>{{ act.name }}</a>
+                </div>
+                <p class="text_user">
+                    {{ act.action|raw }}<br>
+                    <span class="time"> {{ act.date_action }}</span>
+                </p>
+            </div>
+        </div>{{coment.date}}</span>
+        </div>
+    {% endfor %}
+{% else %}
+    {{error}}
+{% endif %}
